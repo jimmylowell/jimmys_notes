@@ -10,7 +10,7 @@
 	- set to run when % dead tuples - defaults = 10% (.1) - see below aws parameter group
 - blocking autovacuum
 	- pg_stat_activity
-	- SELECT * FROM pg_terminate_backend('pid') - use on blocking autovacuum
+	- `SELECT * FROM pg_terminate_backend('pid')` - use on blocking autovacuum
 		- table will stay at highest priority for autovacuum
 		- will resume after query completes
 - autovacuum_work_mem
@@ -30,13 +30,13 @@
 
 # Tuning
 - work_mem 
-    - **work_mem is PER transaction = multiples per query**
+    - **work_mem is PER operation = multiples per query**
     - default = 4mb
     - [Increasing work_mem and shared_buffers](https://dba.stackexchange.com/questions/27893/increasing-work-mem-and-shared-buffers-on-postgres-9-2-significantly-slows-down)
     - each session = max_sessions can baloon used memory as well!!
     - OLTP / OLAP <-> smaller / larger
     - global or session level setting
-        - SET work_mem = '1 GB';
+        - `SET work_mem = '1 GB';`
         - aws parameter group - reconfigure instance
     - analyze query to determine if in memory or on-disk
 
